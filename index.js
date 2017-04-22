@@ -31,4 +31,4 @@ actions.forEach(action => {
   exports[action.name] = actionFn(action)
 });
 
-exports.rest = router;
+exports.resource = router;

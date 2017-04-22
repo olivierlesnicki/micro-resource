@@ -3,12 +3,12 @@ const micro = require('micro');
 const listen = require('test-listen');
 const request = require('request-promise');
 
-const { rest, create, destroy, filter, find, replace, update } = require('./');
+const { resource, create, destroy, filter, find, replace, update } = require('./');
 
 const serve = fn => listen(micro(fn));
 
 test('filter', async t => {
-  const app = rest(
+  const app = resource(
     filter(({ resource: { id, filters, data }}) => ({ name: 'filter', id, filters, data }))
   );
 
@@ -22,7 +22,7 @@ test('filter', async t => {
 });
 
 test('find', async t => {
-  const app = rest(
+  const app = resource(
     find(({ resource: { id, filters, data }}) => ({ name: 'find', id, filters, data }))
   );
 
@@ -36,7 +36,7 @@ test('find', async t => {
 });
 
 test('create', async t => {
-  const app = rest(
+  const app = resource(
     create(({ resource: { id, filters, data }}) => ({ name: 'create', id, filters, data }))
   );
 
@@ -53,7 +53,7 @@ test('create', async t => {
 });
 
 test('update', async t => {
-  const app = rest(
+  const app = resource(
     update(({ resource: { id, filters, data }}) => ({ name: 'update', id, filters, data }))
   );
 
@@ -70,7 +70,7 @@ test('update', async t => {
 });
 
 test('replace', async t => {
-  const app = rest(
+  const app = resource(
     replace(({ resource: { id, filters, data }}) => ({ name: 'replace', id, filters, data }))
   );
 
@@ -87,7 +87,7 @@ test('replace', async t => {
 });
 
 test('destroy', async t => {
-  const app = rest(
+  const app = resource(
     destroy(({ resource: { id, filters, data }}) => ({ name: 'destroy', id, filters, data }))
   );
 
