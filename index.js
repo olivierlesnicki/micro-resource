@@ -13,11 +13,11 @@ const actions = [
 
 const actionFn = action => handler => {
   return action.method(action.path, async (req, res) => {
-    const id = req.params.id;
-    const filters = req.query;
+    const { id } = req.params;
+    const filters = req.query || {};
     let data = {};
 
-    if (action.method == patch || action.method == post || action.method == put) {
+    if (['create', 'update', 'replace'].indexOf(action.name) > -1) {
       data = await json(req);
     }
 
